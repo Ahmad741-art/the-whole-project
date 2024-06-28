@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1>Dashboard</h1>
+<h2>Add Transaction</h2>
+<form method="POST" action="{{ url_for('add_transaction') }}">
+    <label for="type">Type:</label>
+    <select name="type" required>
+        <option value="Income">Income</option>
+        <option value="Expense">Expense</option>
+    </select>
+    <input type="number" name="amount" step="0.01" placeholder="Amount" required>
+    <input type="text" name="category" placeholder="Category" required>
+    <input type="date" name="date" required>
+    <button type="submit">Add</button>
+</form>
+<h2>Transactions</h2>
+<table>
+    <tr>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>Category</th>
+        <th>Date</th>
+    </tr>
+    {% for transaction in transactions %}
+    <tr>
+        <td>{{ transaction.type }}</td>
+        <td>{{ transaction.amount }}</td>
+        <td>{{ transaction.category }}</td>
+        <td>{{ transaction.date }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
